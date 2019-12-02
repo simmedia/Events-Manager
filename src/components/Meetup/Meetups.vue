@@ -14,7 +14,7 @@
             <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
 
             <v-card-actions>
-              <v-btn text>Share</v-btn>
+              <v-btn text to="/meetups/1">View</v-btn>
 
               <v-btn color="purple" text>Explore</v-btn>
 

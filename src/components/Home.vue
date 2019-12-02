@@ -14,11 +14,12 @@
         <v-flex xs12>
           <v-carousel>
             <v-carousel-item 
+            
             v-for="meetup in meetups" 
             :src="meetup.imageUrl" 
             :key="meetup.id"
             >
-            <div class="title">{{meetup.title}}</div>
+            <div style="cursor: pointer" @click="onLoadMeetup(meetup.id)" class="title">{{meetup.title}}</div>
             </v-carousel-item>
           </v-carousel>
         </v-flex>
@@ -37,6 +38,11 @@ export default {
 
         {imageUrl: 'https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/newsletter/eiffel-tower-in-paris-151-medium.jpg?1564742900', id: '5353edsadsd', title: 'Meetup in Paris'}
       ]
+    }
+  },
+  methods: {
+    onLoadMeetup(id) {
+      this.$router.push('/meetups/' + id)
     }
   }
 };
