@@ -31,13 +31,9 @@
 export default {
   name: "home",
   components: {},
-  data() {
-    return {
-      meetups: [
-        {imageUrl: 'https://www.history.com/.image/t_share/MTU3ODc5MDgyNjY5OTc1MjYz/new-york-city.jpg', id: '123edsadsd', title: 'Meetup in NewYork'},
-
-        {imageUrl: 'https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/newsletter/eiffel-tower-in-paris-151-medium.jpg?1564742900', id: '5353edsadsd', title: 'Meetup in Paris'}
-      ]
+  computed: {
+    meetups () {
+      return this.$store.getters.featuredMeetups
     }
   },
   methods: {

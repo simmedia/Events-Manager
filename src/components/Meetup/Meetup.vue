@@ -4,18 +4,16 @@
       <v-col sm="12">
         <v-card>
           <v-card-title>
-            <h4 class="secondary--text">My Meetup</h4>
+            <h4 class="secondary--text">{{meetup.title}}</h4>
           </v-card-title>
-          <v-card-media>
             <v-img
-              src="https://www.history.com/.image/t_share/MTU3ODc5MDgyNjY5OTc1MjYz/new-york-city.jpg"
+              :src="meetup.imageUrl"
               height="300"
             >
             </v-img>
-          </v-card-media>
           <v-card-text>
             <div class="secondary--text" style="font-size: 1.3em">
-              17th July 2019 - Where it take place
+              {{meetup.date}}
             </div>
           </v-card-text>
           <v-card-text>
@@ -35,7 +33,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['id'],
+  computed: {
+    meetup() {
+      return this.$store.getters.loadedMeetup(this.id)
+    }
+  }
+};
 </script>
 
 <style></style>
