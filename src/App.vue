@@ -1,32 +1,69 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-navigation-drawer temporary v-model="drawer" app>
+      <v-list dense>
+        <v-list-item
+          color="indigo"
+          router
+          :to="item.link"
+          v-for="item in menuItems"
+          :key="item.title"
+          link
+        >
+          <v-list-item-action>
+            <v-icon>{{item.icon}}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{item.title}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app color="indigo" dark>
+      <v-app-bar-nav-icon class="hidden-sm-and-up" @click.native.stop="drawer = !drawer" />
+      <v-toolbar-title><router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn v-for="item in menuItems" :key="item.title" router :to="item.link" text>
+          <v-icon left>{{item.icon}}</v-icon>
+          {{item.title}}
+        </v-btn>
+      </v-toolbar-items>
+    </v-app-bar>
+
+    <v-content>
+      <v-container class="fill-height" fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-content>
+    <v-footer color="indigo" app>
+      <span class="white--text">&copy; 2019</span>
+    </v-footer>
+  </v-app>
 </template>
 
+<script>
+export default {
+  name: "App",
+
+  components: {},
+
+  data: () => ({
+    drawer: false,
+    menuItems: [
+      { icon: "mdi-calendar", title: "View Meetups", link: "/meetups" },
+      { icon: "mdi-note", title: "Organise Meetup", link: "/meetup/new" },
+      { icon: "mdi-account", title: "Profile", link: "/profile" },
+      { icon: "mdi-face", title: "Sign Up", link: "/signup" },
+      { icon: "mdi-key", title: "Sign In", link: "/signin" }
+    ]
+  })
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+aside {
+  display: none;
 }
 </style>
