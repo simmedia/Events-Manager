@@ -7,7 +7,7 @@
             <h4 class="secondary--text">{{meetup.title}}</h4>
             <template v-if="userIsCreator">
               <v-spacer></v-spacer>
-              <app-edit-meetup-details-dialog></app-edit-meetup-details-dialog>
+              <app-edit-meetup-details-dialog :meetup="meetup"></app-edit-meetup-details-dialog>
             </template>
           </v-card-title>
             <v-img

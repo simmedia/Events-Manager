@@ -33,7 +33,7 @@
     </v-navigation-drawer>
 
     <v-app-bar app color="indigo" dark>
-      <v-app-bar-nav-icon class="hidden-sm-and-up" @click.native.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon class="hidden-sm-and-up" @click.stop="drawer = !drawer" />
       <v-toolbar-title>
         <router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link>
       </v-toolbar-title>

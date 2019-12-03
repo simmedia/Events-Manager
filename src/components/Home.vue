@@ -1,14 +1,14 @@
 <template>
   <v-container>
-    <v-layout class="mb-5" row wrap>
-      <v-flex xs12 sm6 class="text-xs-center text-sm-center">
+    <v-row class="mb-5" wrap>
+      <v-col xs="12" sm="6" class="text-xs-center text-sm-center">
         <v-btn large router to="/meetups" class="primary">Explore Meetups</v-btn>
-      </v-flex>
+      </v-col>
 
-      <v-flex xs12 sm6 class="text-xs-center text-sm-center">
+      <v-col xs="12" sm="6" class="text-xs-center text-sm-center">
         <v-btn large router to="/meetup/new" class="primary">Organize Meetup</v-btn>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
     <v-row justify="center">
       <v-col xs="12" sm="6" class="text-center">
