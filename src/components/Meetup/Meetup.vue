@@ -21,10 +21,7 @@
             </div>
           </v-card-text>
           <v-card-text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A non fuga,
-            asperiores soluta reprehenderit libero maiores reiciendis ut!
-            Voluptatem iste alias optio fugit provident laudantium esse odio
-            eius quam officia!
+            {{meetup.description}}
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>

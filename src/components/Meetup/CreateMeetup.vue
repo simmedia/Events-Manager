@@ -24,11 +24,17 @@
 
           <v-col xs="12" sm="12">
             <v-btn raised class="primary" @click="onPickFile">Upload image</v-btn>
-            <input @change="onFilePicked" type="file" style="display:none" ref="fileInput" accept="image/*" />
+            <input
+              @change="onFilePicked"
+              type="file"
+              style="display:none"
+              ref="fileInput"
+              accept="image/*"
+            />
           </v-col>
 
           <v-col xs="12" sm="12">
-            <v-img height="300" :src="imageUrl"></v-img>
+            <v-img height="200" :src="imageUrl"></v-img>
           </v-col>
 
           <v-col xs="12" sm="12">
@@ -44,16 +50,15 @@
           <v-row justify="center">
             <v-col xs="12" sm="12" lg="6">
               <v-date-picker v-model="date"></v-date-picker>
-              <p>{{ date }}</p>
-            </v-col>
-            <v-col xs="12" sm="12" lg="6">
-              <v-time-picker format="24hr" v-model="time"></v-time-picker>
-              <p>{{ time }}</p>
             </v-col>
           </v-row>
-          <v-col xs="12" sm="12">
+          <v-row justify="center">
+            <v-col xs="12" sm="12" lg="6">
+              <v-time-picker format="24hr" v-model="time"></v-time-picker>
+            </v-col>
+          </v-row>
+          <v-col align="center" xs="12" sm="12">
             <v-btn type="submit" :disabled="!formIsValid" class="primary">Create Meetup</v-btn>
-            {{ submittableDateTime }}
           </v-col>
         </form>
       </v-col>
@@ -69,8 +74,8 @@ export default {
       location: "",
       imageUrl: "",
       description: "",
-      date: null,
-      time: null,
+      date: "",
+      time: "",
       image: null
     };
   },
@@ -92,8 +97,8 @@ export default {
       if (!this.formIsValid) {
         return;
       }
-      if(!this.image) {
-        return
+      if (!this.image) {
+        return;
       }
       const meetupData = {
         title: this.title,
@@ -109,15 +114,15 @@ export default {
       this.$refs.fileInput.click();
     },
     onFilePicked(event) {
-      const files = event.target.files
-      let filename = files[0].name
-      const fileReader = new FileReader()
-      fileReader.addEventListener('load', () => {
-        this.imageUrl = fileReader.result
-      })
-      console.log(fileReader)
-      fileReader.readAsDataURL(files[0])
-      this.image = files[0]
+      const files = event.target.files;
+      let filename = files[0].name;
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", () => {
+        this.imageUrl = fileReader.result;
+      });
+      console.log(fileReader);
+      fileReader.readAsDataURL(files[0]);
+      this.image = files[0];
     }
   }
 };

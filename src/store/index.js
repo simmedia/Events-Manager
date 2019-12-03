@@ -45,6 +45,10 @@ export default new Vuex.Store({
       state.error = null
     }
   },
+
+
+  // actions
+
   actions: {
     loadMeetups({
       commit
