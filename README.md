@@ -1,4 +1,4 @@
-# meetups-vue
+# Meetup Manager made with VueJs, Vuex and Firebase
 
 ## Project setup
 ```
