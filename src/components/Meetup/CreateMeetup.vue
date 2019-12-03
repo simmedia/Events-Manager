@@ -23,13 +23,8 @@
           </v-col>
 
           <v-col xs="12" sm="12">
-            <v-text-field
-              label="image URL"
-              id="image-url"
-              name="imageUrl"
-              v-model="imageUrl"
-              required
-            ></v-text-field>
+            <v-btn raised class="primary" @click="onPickFile">Upload image</v-btn>
+            <input @change="onFilePicked" type="file" style="display:none" ref="fileInput" accept="image/*" />
           </v-col>
 
           <v-col xs="12" sm="12">
@@ -53,7 +48,7 @@
             </v-col>
             <v-col xs="12" sm="12" lg="6">
               <v-time-picker format="24hr" v-model="time"></v-time-picker>
-            <p>{{ time }}</p>
+              <p>{{ time }}</p>
             </v-col>
           </v-row>
           <v-col xs="12" sm="12">
@@ -75,7 +70,8 @@ export default {
       imageUrl: "",
       description: "",
       date: null,
-      time: null
+      time: null,
+      image: null
     };
   },
   computed: {
@@ -88,13 +84,16 @@ export default {
       );
     },
     submittableDateTime() {
-      return `${this.date} at ${this.time}`
+      return `${this.date} at ${this.time}`;
     }
   },
   methods: {
     onCreateMeetup() {
       if (!this.formIsValid) {
         return;
+      }
+      if(!this.image) {
+        return
       }
       const meetupData = {
         title: this.title,
@@ -105,6 +104,20 @@ export default {
       };
       this.$store.dispatch("createMeetup", meetupData);
       this.$router.push("/meetups");
+    },
+    onPickFile() {
+      this.$refs.fileInput.click();
+    },
+    onFilePicked(event) {
+      const files = event.target.files
+      let filename = files[0].name
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+        this.imageUrl = fileReader.result
+      })
+      console.log(fileReader)
+      fileReader.readAsDataURL(files[0])
+      this.image = files[0]
     }
   }
 };

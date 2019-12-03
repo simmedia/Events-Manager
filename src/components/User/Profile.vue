@@ -1,14 +1,18 @@
 <template>
   <div>
       <p>
-          user
+          {{currentUser}}
       </p>
   </div>
 </template>
 
 <script>
 export default {
-
+ computed: {
+   currentUser() {
+     return this.$store.getters.user
+   }
+ }
 }
 </script>
 

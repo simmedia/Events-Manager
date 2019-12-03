@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <v-layout row wrap>
       <v-row>
         <v-col v-for="meetup in meetups" :key="meetup.id" lg="4" sm="6" xs="12">
           <v-card class="mx-auto">
@@ -23,7 +22,6 @@
           </v-card>
         </v-col>
       </v-row>
-    </v-layout>
   </v-container>
 </template>
 
