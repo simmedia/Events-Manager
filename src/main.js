@@ -5,9 +5,13 @@ import router from './router'
 import * as firebase from 'firebase'
 import store from './store'
 import vuetify from './plugins/vuetify';
+import AlertCmp from './components/shared/Alert.vue'
+import { VCounter } from 'vuetify/lib'
 
 
 Vue.config.productionTip = false
+
+Vue.component('app-alert', AlertCmp)
 
 new Vue({
   router,
@@ -24,5 +28,7 @@ new Vue({
       messagingSenderId: "133901632393",
       appId: "1:133901632393:web:0bbdd2862042083aba5758"
     })
+
+    this.$store.dispatch('loadMeetups')
   }
 }).$mount('#app')

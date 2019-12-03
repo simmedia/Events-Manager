@@ -10,20 +10,30 @@
       </v-flex>
     </v-layout>
 
-      <v-layout row wrap>
-        <v-flex xs12>
-          <v-carousel>
-            <v-carousel-item 
-            
-            v-for="meetup in meetups" 
-            :src="meetup.imageUrl" 
-            :key="meetup.id"
-            >
-            <div style="cursor: pointer" @click="onLoadMeetup(meetup.id)" class="title">{{meetup.title}}</div>
-            </v-carousel-item>
-          </v-carousel>
-        </v-flex>
-      </v-layout>
+    <v-row justify="center">
+      <v-col xs="12" sm="6" class="text-center">
+        <v-progress-circular 
+        width="7"
+        :size="70"
+        indeterminate 
+        v-if="loading"
+        :value="40"></v-progress-circular>
+      </v-col>
+    </v-row>
+
+    <v-layout row wrap>
+      <v-flex xs12>
+        <v-carousel v-if="!loading">
+          <v-carousel-item v-for="meetup in meetups" :src="meetup.imageUrl" :key="meetup.id">
+            <div
+              style="cursor: pointer"
+              @click="onLoadMeetup(meetup.id)"
+              class="title"
+            >{{meetup.title}}</div>
+          </v-carousel-item>
+        </v-carousel>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -32,13 +42,16 @@ export default {
   name: "home",
   components: {},
   computed: {
-    meetups () {
-      return this.$store.getters.featuredMeetups
+    meetups() {
+      return this.$store.getters.featuredMeetups;
+    },
+    loading() {
+      return this.$store.getters.loading
     }
   },
   methods: {
     onLoadMeetup(id) {
-      this.$router.push('/meetups/' + id)
+      this.$router.push("/meetups/" + id);
     }
   }
 };
@@ -46,14 +59,14 @@ export default {
 
 
 <style lang="scss" scoped>
-  .title {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    bottom: 50px;
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    font-size: 2em;
-    padding: 20px;
-  }
+.title {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 2em;
+  padding: 20px;
+}
 </style>

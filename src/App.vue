@@ -22,7 +22,9 @@
 
     <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon class="hidden-sm-and-up" @click.native.stop="drawer = !drawer" />
-      <v-toolbar-title><router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link></v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
         <v-btn v-for="item in menuItems" :key="item.title" router :to="item.link" text>
@@ -50,15 +52,30 @@ export default {
   components: {},
 
   data: () => ({
-    drawer: false,
-    menuItems: [
-      { icon: "mdi-calendar", title: "View Meetups", link: "/meetups" },
-      { icon: "mdi-note", title: "Organise Meetup", link: "/meetup/new" },
-      { icon: "mdi-account", title: "Profile", link: "/profile" },
-      { icon: "mdi-face", title: "Sign Up", link: "/signup" },
-      { icon: "mdi-key", title: "Sign In", link: "/signin" }
-    ]
-  })
+    drawer: false
+  }),
+  computed: {
+    menuItems() {
+      let menuItems = [
+        { icon: "mdi-face", title: "Sign Up", link: "/signup" },
+        { icon: "mdi-key", title: "Sign In", link: "/signin" }
+      ];
+      if (this.userIsAuth) {
+        menuItems = [
+          { icon: "mdi-calendar", title: "View Meetups", link: "/meetups" },
+          { icon: "mdi-note", title: "Organise Meetup", link: "/meetup/new" },
+          { icon: "mdi-account", title: "Profile", link: "/profile" }
+        ];
+      }
+      return menuItems;
+    },
+    userIsAuth() {
+      return (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      );
+    }
+  }
 };
 </script>
 
